@@ -5,10 +5,10 @@
 - Name: Not provided
 - Registration number: `202401100200099`
 - PORT: `179` (`80 + 99`)
-- Docker Hub username: Not provided
-- Docker Hub repository: Not created; username and authenticated publishing are required.
+- Docker Hub username: `ateen2428rai`
+- Docker Hub repository: Not created or verified; authenticated publishing has not been tested.
 - Required GitHub repository name: `202401100200099-docker-assessment`
-- GitHub URL: Not created or verified.
+- GitHub URL: https://github.com/ateenrai/202401100200099-docker-assessment
 
 ## Project
 
@@ -32,13 +32,13 @@ run in this environment.
 | Check | Result |
 |---|---|
 | Backend Python syntax (`python -m py_compile backend/app.py`) | Passed |
-| Docker daemon | Not available: Docker Desktop reports that it is unable to start; WSL is not installed |
+| Docker daemon | Not available: Docker Desktop reports that it is unable to start |
 | Docker build, Compose startup, API, database persistence, and network isolation | Not run |
 | Trivy scans and CRITICAL/HIGH counts | Not run; no scan results are claimed |
 | Image sizes | Not available; no images were built |
-| Docker Hub push, published digest, and registry deployment | Not run; Docker Hub username/authentication unavailable |
+| Docker Hub push, published digest, and registry deployment | Not run; image build is blocked by the unavailable Docker daemon |
 | Cosign key generation, signing, and signature verification | Not run; Cosign is unavailable |
-| Git commit | Initial commit created locally; GitHub push not run |
+| Git commit and GitHub push | Initial commit `2fff0f3` is pushed to `main` |
 
 `reports/trivy-before.txt` and `reports/trivy-after.txt` are status notes, not
 scanner output. Replace them with genuine Trivy output after running the
@@ -55,8 +55,8 @@ fabricated.
 |---|---|
 | S1-2, S1-3 | Not captured; Docker daemon unavailable |
 | S2-2, S2-3, S2-4 | Not captured; Docker daemon unavailable |
-| S3-1, S3-3 | Not captured; Trivy/Docker unavailable |
-| S4-1, S4-2, S4-3 | Not captured; Docker Hub username/authentication unavailable |
+| S3-1, S3-3 | Not captured; Docker daemon unavailable |
+| S4-1, S4-2, S4-3 | Not captured; image build and publish are blocked by the unavailable Docker daemon |
 | S5-1, S5-2, S5-3, S5-4 | Not captured; Cosign/Docker Hub unavailable |
 
 ## AI tools
@@ -67,9 +67,9 @@ fabricated.
 
 ## Incomplete tasks
 
-- Install WSL from an elevated PowerShell (`wsl --install`) and restart
-  Windows; start Docker Desktop and confirm `docker version` shows a Server.
-- Install/verify Git, Trivy, and Cosign. Download the Trivy database and pull
+- Resolve the Docker Desktop startup issue; confirm `docker version` shows a
+  Server before building or running the Compose stack.
+- Install Cosign. After Docker is running, download the Trivy database and pull
   the assessment's required base images.
 - Run the original Stage 1 `python:3.9` build and capture S1-2/S1-3 before
   recording those historical results; the current Dockerfile is the hardened
@@ -79,12 +79,12 @@ fabricated.
   persistence.
 - Run both genuine Trivy scans and the CRITICAL gate; replace the report status
   notes and record measured vulnerability counts and image sizes.
-- Provide a Docker Hub username, authenticate with Docker's normal login flow,
-  publish tags `1.0.0` and `1.0`, and record the actual digest.
+- Authenticate to Docker Hub as `ateen2428rai`, publish tags `1.0.0` and
+  `1.0`, and record the actual digest.
 - Generate a password-protected Cosign key pair locally, keep `cosign.key`
   private and uncommitted, commit the generated `cosign.pub`, sign the actual
   `1.0.0` digest, and demonstrate verification success and unsigned `1.0.1`
   rejection.
-- Capture all required screenshots, create the public GitHub repository named
-  `202401100200099-docker-assessment`, commit each stage separately, review
-  the changes, and push only after approval.
+- Capture all required screenshots. The GitHub repository exists and the
+  current `main` branch is pushed; stage-specific commits remain to be created
+  if they are required by the assessment.
